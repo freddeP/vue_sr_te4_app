@@ -3,7 +3,8 @@ const dataStore = {
     data:{
         favChannels:[],
         channelId:[132],
-        programs:[]
+        programs:[],
+        programId:[]
 
     },
     methods:{
@@ -31,6 +32,10 @@ const dataStore = {
                 dataStore.data.programs.push(program);
             });
 
+        },
+        setProgramId(id){
+            dataStore.data.programId.pop();
+            dataStore.data.programId.push(parseInt(id));
         },
         async getData(url){
             let data = await fetch(url);

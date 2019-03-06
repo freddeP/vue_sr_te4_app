@@ -1,8 +1,9 @@
 <template>
   <div class="home">
-
+    
     <Channel/>
     <Program/>
+    <PoddFile/>
 
   </div>
 </template>
@@ -21,7 +22,7 @@ export default {
   .home{
     display:flex;
   }
-  #program, #channel{
+  #program, #channel,#poddFile{
     flex:1;
     padding:2%;
     border-right:1px solid #ddd;
