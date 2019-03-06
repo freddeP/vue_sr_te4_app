@@ -3,19 +3,13 @@
       <h1>Program Component</h1>
        channelId:  {{channelId}} <br> programId: {{programId}} <br>
 
-       <input v-on:keydown.13="selectProgram" v-on:keydown.40.39="arrowSelect" v-on:keyup="searchPrograms" type="text" placeholder="sök program" v-model="searchValue">
-       
-       <div id="results" >
-         <div v-on:click="selectProgram(program.id)" v-for="program in results" :key="program.id" :id="program.id">
-            <span>  <img :src="program.programimage" alt="">  {{program.name}}</span>
-         </div>
-       </div>
-
-     <hr>
-  <!--     <div class='programs' v-for="program in programs" :key="program.id">
+       <input v-on:keydown.13="selectProgram" v-on:keydown.40.39="arrowSelect"  type="text" placeholder="sök program" v-model="searchValue">
+    
+        <hr>
+      <div class='programs'  v-for="program in filteredPrograms" :key="program.id" v-on:click="selectProgram(program.id)" :id="program.id">
           <span>  <img :src="program.programimage" alt="">  {{program.name}}</span>
 
-      </div> -->
+      </div>
 
 
   </div>
@@ -29,7 +23,6 @@ export default {
         return {
             programs:dataStore.data.programs,
             channelId:dataStore.data.channelId,
-            results:[],
             programId:dataStore.data.programId,
             searchValue:"",
             count:0
@@ -39,10 +32,18 @@ export default {
      dataStore.methods.getPrograms();
 
     },
+    computed:{
+        // Metod som påverkar datan: programs direkt...
+        filteredPrograms:function(){
+            return this.programs.filter((program)=>{
+                return program.name.toLowerCase().match(this.searchValue.toLowerCase());
+            })
+        }
+    },
     methods:{
 
         searchPrograms(){
-        
+            // metod används inte längre...
            this.results = this.programs.filter((program)=>{
                 if(this.searchValue != "")
                 { 
@@ -50,18 +51,16 @@ export default {
                     if(r != -1) return program;
                 }
             });
-
-
         },
         arrowSelect(){
-           
-            let parent = document.getElementById("results");
+            let programs = document.getElementsByClassName("programs");
+        
             if(document.querySelector(".selected"))
             document.querySelector(".selected").classList.remove("selected");
 
-            parent.children[this.count].classList.add("selected");
+            programs[this.count].classList.add("selected");
             this.count++;
-            if(this.count>parent.children.length-1)
+            if(this.count>programs.length-1)
             {
                 this.count = 0;
             }
@@ -93,6 +92,12 @@ export default {
 
 
 <style scoped>
+.programs{
+    border: 1px solid #fff;
+}
+.programs:hover{
+    border: 1px solid #909090;
+}
     img{
         width:40px;
         height:40px;
@@ -101,8 +106,7 @@ export default {
         cursor:pointer;
     }
     .selected{
-        background: #303030;
-        color:#fff;
+        border: 1px solid #909090;
     }
 
 </style>

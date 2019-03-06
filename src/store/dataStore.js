@@ -4,7 +4,8 @@ const dataStore = {
         favChannels:[],
         channelId:[132],
         programs:[],
-        programId:[]
+        programId:[4058],
+        podfiles:[]
 
     },
     methods:{
@@ -33,9 +34,20 @@ const dataStore = {
             });
 
         },
+        async getPodfiles()
+        {
+            const url = "http://api.sr.se/api/v2/podfiles?size=20&format=json&programid="+dataStore.data.programId[0]
+            const srPrograms = (await dataStore.methods.getData(url)).podfiles;
+            dataStore.data.podfiles.splice(0);
+            srPrograms.forEach(function(program){
+                dataStore.data.podfiles.push(program);
+            });
+
+        },
         setProgramId(id){
             dataStore.data.programId.pop();
             dataStore.data.programId.push(parseInt(id));
+            dataStore.methods.getPodfiles();
         },
         async getData(url){
             let data = await fetch(url);

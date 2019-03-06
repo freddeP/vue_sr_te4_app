@@ -3,6 +3,16 @@
 
         <h1>Poddfiles Component</h1>
         programId: {{programId}}
+        <br>
+       <div v-for="pod in podfiles" :key="pod.id">
+            <h3> {{pod.title}} </h3>
+            <audio :src="pod.url"></audio>
+            <audio controls>
+                <source :src="pod.url" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <p> {{Date(pod.publishdateutc)}} </p>
+       </div>
 
     </div>
 </template>
@@ -13,9 +23,12 @@ export default {
     data:function(){
         return{
             programId: dataStore.data.programId,
-
+            podfiles: dataStore.data.podfiles
 
         }
+    },
+    created(){
+        dataStore.methods.getPodfiles();
     }
 }
 </script>
