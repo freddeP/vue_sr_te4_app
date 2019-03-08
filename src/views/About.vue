@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
-    <program/>
+    <h1>FP´s Favourites</h1>
+    <FavProg></FavProg>
   </div>
 </template>

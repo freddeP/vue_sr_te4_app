@@ -1,7 +1,7 @@
 <template>
     <div id="poddFile">
 
-        <h1>Poddfiles Component</h1>
+        <h1>Podfiles</h1>
         programId: {{programId}}
         <br>
        <div v-for="pod in podfiles" :key="pod.id">

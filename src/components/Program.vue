@@ -7,7 +7,7 @@
     
         <hr>
       <div class='programs'  v-for="program in filteredPrograms" :key="program.id" v-on:click="selectProgram(program.id)" :id="program.id">
-          <span>  <img :src="program.programimage" alt="">  {{program.name}}</span>
+          <span>  <img :src="program.programimage" alt="">  {{program.name}}  </span> <button  @click="saveFav(ev, program.id)"> + </button>
 
       </div>
 
@@ -42,6 +42,12 @@ export default {
     },
     methods:{
 
+        saveFav(ev,id){
+            window.event.stopPropagation();
+            
+            dataStore.methods.addFavProgram(id);
+
+        },
         searchPrograms(){
             // metod används inte längre...
            this.results = this.programs.filter((program)=>{

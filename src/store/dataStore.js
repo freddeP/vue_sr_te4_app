@@ -5,11 +5,25 @@ const dataStore = {
         channelId:[132],
         programs:[],
         programId:[4058],
-        podfiles:[]
+        podfiles:[],
+        favProg:[]
 
     },
     methods:{
 
+        syncFavProgram()
+        {
+            const pid = JSON.parse(localStorage.favProg);
+            dataStore.data.favProg = pid;
+        },
+
+        addFavProgram(id){
+            const index = dataStore.data.favProg.indexOf(id);
+            if(index === -1) dataStore.data.favProg.push(id);
+            localStorage.favProg = "";
+            localStorage.favProg = JSON.stringify(dataStore.data.favProg); 
+
+        },
         addFavChannel(id){
             var index = dataStore.data.favChannels.indexOf(id);
             if(index === -1)  dataStore.data.favChannels.push(id);       
@@ -57,8 +71,6 @@ const dataStore = {
 
 
     }
-
-
 };
 
 export default dataStore;
