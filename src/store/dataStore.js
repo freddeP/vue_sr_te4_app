@@ -40,7 +40,7 @@ const dataStore = {
         },
        async getPrograms()
         {
-            const url = "http://api.sr.se/api/v2/programs/index?pagination=false&format=json&channelid="+dataStore.data.channelId[0]
+            const url = "https://api.sr.se/api/v2/programs/index?pagination=false&format=json&channelid="+dataStore.data.channelId[0]
             const srPrograms = (await dataStore.methods.getData(url)).programs;
             dataStore.data.programs.splice(0);
             srPrograms.forEach(function(program){
@@ -50,7 +50,7 @@ const dataStore = {
         },
         async getPodfiles()
         {
-            const url = "http://api.sr.se/api/v2/podfiles?size=20&format=json&programid="+dataStore.data.programId[0]
+            const url = "https://api.sr.se/api/v2/podfiles?size=20&format=json&programid="+dataStore.data.programId[0]
             const srPrograms = (await dataStore.methods.getData(url)).podfiles;
             dataStore.data.podfiles.splice(0);
             srPrograms.forEach(function(program){

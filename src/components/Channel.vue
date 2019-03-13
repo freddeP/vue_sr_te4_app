@@ -37,7 +37,7 @@ export default {
 
   },
   async created(){
-    const url = "http://api.sr.se/api/v2/channels?format=json&pagination=false";
+    const url = "https://api.sr.se/api/v2/channels?format=json&pagination=false";
     const rawChan = await dataStore.methods.getData(url);
     this.channels = rawChan.channels;
   }
