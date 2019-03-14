@@ -6,7 +6,8 @@ const dataStore = {
         programs:[],
         programId:[4058],
         podfiles:[],
-        favProg:[]
+        favProg:[],
+        favPrograms:[]
 
     },
     methods:{
@@ -22,6 +23,20 @@ const dataStore = {
             if(index === -1) dataStore.data.favProg.push(id);
             localStorage.favProg = "";
             localStorage.favProg = JSON.stringify(dataStore.data.favProg); 
+            dataStore.methods.getFavPrograms();
+        },
+        async getFavPrograms()
+        {
+            const url = "http://api.sr.se/api/v2/programs/?format=json&pagination=false";
+            const programs = (await dataStore.methods.getData(url)).programs;
+            dataStore.data.favPrograms.splice(0);
+            programs.forEach((program)=>{
+                for(let i in dataStore.data.favProg)
+                {
+                    if(dataStore.data.favProg[i] == program.id)
+                    dataStore.data.favPrograms.push(program);
+                }
+            });
 
         },
         addFavChannel(id){

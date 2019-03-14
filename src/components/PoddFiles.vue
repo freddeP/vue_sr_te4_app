@@ -1,9 +1,9 @@
 <template>
     <div id="poddFile">
 
-        <h1>Podfiles</h1>
+       <!-- <h1>Podfiles</h1>
         programId: {{programId}}
-        <br>
+        <br>-->
         <div class="allPodFiles">
             <div  v-for="pod in podfiles" :key="pod.id">
                     <h3> {{pod.title}} </h3>

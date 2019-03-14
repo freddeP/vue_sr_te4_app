@@ -5,6 +5,7 @@ import Channel from './components/Channel.vue'
 import Program from './components/Program.vue';
 import PoddFile from './components/PoddFiles.vue';
 import FavProg from "./components/FavProg.vue";
+import ProgramSearch from "./components/ProgramSearch.vue";
 
 Vue.config.productionTip = false
 Vue.use(router)
@@ -13,6 +14,7 @@ Vue.component("Channel",Channel);
 Vue.component("Program",Program);
 Vue.component("PoddFile",PoddFile);
 Vue.component("FavProg",FavProg);
+Vue.component("ProgramSearch", ProgramSearch);
 
 new Vue({
   router,
