@@ -2,13 +2,21 @@
 
     <div id="favProg">
         <hr>
-       <div  class="programs" @click="setProgramId(program.id, program.name)" v-for="program in favPrograms" :key="program.id">
-            <span> <img :src="program.programimage" alt=""> {{program.name}} </span>
+        <div class="menuButton" @click="toggle('allPrograms')"> &equiv; <small>Program</small> </div> 
+        <div id = "allPrograms">
+            <div  class="programs" @click="setProgramId(program.id, program.name)" v-for="program in favPrograms" :key="program.id">
+                    <span> <img :src="program.programimage" alt=""> {{program.name}} </span>
+            </div>
        </div>
+       <br><br>
+        <div style="font-size:23px;" class="menuButton" @click="toggleProgramSearch()">&#128270; +</div>
+          <div v-if="ps">
+            <ProgramSearch/>
+          </div>
         <hr>
         <h1> {{programName}} </h1>
         <PoddFile />
-        <ProgramSearch/>
+      
     </div>    
 </template>
 
@@ -19,31 +27,27 @@ export default {
         return {
             favProg:dataStore.data.favProg,
             favPrograms:dataStore.data.favPrograms,
-            programName:""
+            programName:"",
+            ps:false
         }
     },
     beforeCreate(){
         dataStore.methods.syncFavProgram();
     },
      async created(){
-         dataStore.methods.getFavPrograms();
-/*         const url = "http://api.sr.se/api/v2/programs/?format=json&pagination=false";
-        const programs = (await dataStore.methods.getData(url)).programs;
-
-        programs.forEach((program)=>{
-            for(let i in this.favProg)
-            {
-                if(this.favProg[i] == program.id)
-                this.favPrograms.push(program);
-            }
-        }); */
-
-        
+         dataStore.methods.getFavPrograms();  
     },
     methods:{
+        toggleProgramSearch(){
+            this.ps = !this.ps;
+        },
         setProgramId(id,name){
             dataStore.methods.setProgramId(id);
             this.programName = name;
+            this.toggle('allPrograms');
+        },
+        toggle(id){
+            document.getElementById(id).classList.toggle("hidden");
         }
     }
 }
@@ -56,6 +60,13 @@ img{
 }
 .programs{
     cursor:pointer;
+}
+.menuButton{
+    font-size:40px;
+    cursor:pointer;
+}
+.hidden{
+    display:none;
 }
 
 </style>
