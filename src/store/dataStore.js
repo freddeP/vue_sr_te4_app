@@ -27,7 +27,7 @@ const dataStore = {
         },
         async getFavPrograms()
         {
-            const url = "http://api.sr.se/api/v2/programs/?format=json&pagination=false";
+            const url = "https://api.sr.se/api/v2/programs/?format=json&pagination=false";
             const programs = (await dataStore.methods.getData(url)).programs;
             dataStore.data.favPrograms.splice(0);
             programs.forEach((program)=>{
