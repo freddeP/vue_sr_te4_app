@@ -2,20 +2,24 @@
 
     <div id="favProg">
         <hr>
-        <div class="menuButton" @click="toggle('allPrograms')"> &equiv; <small>Program</small> </div> 
+        <div class="menuButton" @click="toggle('allPrograms')"> <small dark> Favoriter </small> <v-icon large>menu</v-icon>  </div> 
+        <br>
         <div v-if="programShow" id = "allPrograms">
             <div  class="programs" @click="setProgramId(program.id, program.name)" v-for="program in favPrograms" :key="program.id">
                     <span> <img :src="program.programimage" alt=""> {{program.name}} </span>
             </div>
        </div>
        <br><br>
-        <div style="font-size:23px;" class="menuButton" @click="toggleProgramSearch()">&#128270; +</div>
+        <div class="menuButton" @click="toggleProgramSearch()"> <small> Program </small> <v-icon large>menu</v-icon> </div>
           <div v-if="ps">
             <ProgramSearch/>
           </div>
         <hr>
         <h1> {{programName}} </h1>
-        <PoddFile />
+        <div v-if="!ps">
+            <PoddFile />
+        </div>
+       
       
     </div>    
 </template>
@@ -63,7 +67,7 @@ img{
     cursor:pointer;
 }
 .menuButton{
-    font-size:40px;
+    font-size:36px;
     cursor:pointer;
 }
 

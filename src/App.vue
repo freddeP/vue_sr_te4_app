@@ -2,8 +2,8 @@
   <div id="app">
   
     <div id="nav">
-      <router-link to="/admin">admin</router-link> |
-      <router-link to="/">fp´s favoriter</router-link>
+      <router-link to="/admin"> <v-icon>settings</v-icon> </router-link> |
+      <router-link to="/"> <v-icon>home</v-icon></router-link>
     </div>
     <router-view/>
   </div>
