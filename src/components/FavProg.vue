@@ -3,7 +3,7 @@
     <div id="favProg">
         <hr>
         <div class="menuButton" @click="toggle('allPrograms')"> &equiv; <small>Program</small> </div> 
-        <div id = "allPrograms">
+        <div v-if="programShow" id = "allPrograms">
             <div  class="programs" @click="setProgramId(program.id, program.name)" v-for="program in favPrograms" :key="program.id">
                     <span> <img :src="program.programimage" alt=""> {{program.name}} </span>
             </div>
@@ -28,7 +28,8 @@ export default {
             favProg:dataStore.data.favProg,
             favPrograms:dataStore.data.favPrograms,
             programName:"",
-            ps:false
+            ps:false,
+            programShow: true
         }
     },
     beforeCreate(){
@@ -46,8 +47,8 @@ export default {
             this.programName = name;
             this.toggle('allPrograms');
         },
-        toggle(id){
-            document.getElementById(id).classList.toggle("hidden");
+        toggle(){
+            this.programShow = ! this.programShow;
         }
     }
 }
@@ -65,8 +66,6 @@ img{
     font-size:40px;
     cursor:pointer;
 }
-.hidden{
-    display:none;
-}
+
 
 </style>
