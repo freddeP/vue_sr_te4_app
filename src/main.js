@@ -7,7 +7,7 @@ import PoddFile from './components/PoddFiles.vue';
 import FavProg from "./components/FavProg.vue";
 
 Vue.config.productionTip = false
-
+Vue.use(router)
 // Lägg till vue-komponent globalt
 Vue.component("Channel",Channel);
 Vue.component("Program",Program);
